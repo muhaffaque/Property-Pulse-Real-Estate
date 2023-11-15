@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import express from 'express'
 
 //creating schema
 const userSchema = new mongoose.Schema({
