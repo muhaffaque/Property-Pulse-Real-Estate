@@ -1,5 +1,5 @@
 import {GoogleAuthProvider, getAuth, signInWithPopup} from 'firebase/auth'
-import { app } from '../firebase'
+import {app} from '../firebase'
 
 function OAuth() {
     const handleGoogleClick = async () =>{
