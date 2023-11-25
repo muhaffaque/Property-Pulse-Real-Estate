@@ -33,3 +33,18 @@ export const signin = async(req,res,next)=>{
       next(error)
    }
 }
+
+export const google = async(req, res, next)=>{
+   try {
+      const user = await User.findOne({email: req.body.email})
+      if(user){
+         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
+         const {password: pass, ...rest_info} = user._doc
+         res.cookie('acess_token', token, {httpOnly: true}).status(200).json(rest_info)
+      }else{
+         
+      }
+   } catch (error) {
+      next(error)
+   }
+}
