@@ -42,7 +42,13 @@ export const google = async(req, res, next)=>{
          const {password: pass, ...rest_info} = user._doc
          res.cookie('acess_token', token, {httpOnly: true}).status(200).json(rest_info)
       }else{
-         
+         const generatedPassword = Math.random().toString(36).slice(-8)+ Math.random().toString(36).slice(-8)
+         const hashpassword = bcryptjs.hashSync(generatedPassword, 10)
+         const newUser = new User({username: req.body.name.split(" ").join("").toLowerCase() + Math.random().toString(36).slice(-4) , email: req.body.email, password: hashpassword, avatar: req.body.photo})
+         await newUser.save()
+         const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET)
+         const {password:pass, ...rest_info} = newUser._doc
+         res.cookie('acess_token', token, {httpOnly: true}).status(200).json(rest_info)
       }
    } catch (error) {
       next(error)
