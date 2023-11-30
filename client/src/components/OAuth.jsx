@@ -6,7 +6,7 @@ import { signInSuccess } from '../redux/user/userSlice';
 function OAuth() {
   const dispatch = useDispatch();
     const handleGoogleClick = async () =>{
-        try {
+        try { 
             const provider = new GoogleAuthProvider() 
             const auth = getAuth(app) //app exported from firebase
 
