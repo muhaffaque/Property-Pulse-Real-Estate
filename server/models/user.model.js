@@ -17,11 +17,14 @@ const userSchema = new mongoose.Schema({
         required: true,
 
     },
-    avatar: String,
+    avatar: {
+    type: String,
     default: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    }
 }, {timestamps:true});
 
 //creating a model
 const User = mongoose.model('User', userSchema)
 
 export default User;
+
